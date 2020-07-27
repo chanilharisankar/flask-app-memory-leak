@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  ios_run: true
+  ios_run: $(to_ios_run)
   
 stages:
   - stage: android
