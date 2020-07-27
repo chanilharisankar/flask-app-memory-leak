@@ -4,17 +4,24 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-    CleanTargetFolder: true
-    OverWrite: true
+variables:
+  ios_run: 
+  
+stages:
+  - stage: android
+    pool:
+      vmImage: 'ubuntu-16.04'
+    jobs:
+      - job: A1
+        steps:
+        - bash: echo "A"
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'testapp'
-    publishLocation: 'Container'
+  - stage: ios
+    condition: eq(variables.ios_run, true)
+    pool:
+      vmImage: 'ubuntu-latest'
+    jobs:
+      - job: B1
+        steps:
+        - bash: echo "B"
+    
