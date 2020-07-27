@@ -11,8 +11,7 @@ stages:
     jobs:
       - job: A1
         steps:
-        - bash: echo $(to_ios_run)
-        - bash: echo $(ios_run)
+        - bash: echo "A"
 
   - stage: ios
     condition: eq(variables.to_ios_run, true)
