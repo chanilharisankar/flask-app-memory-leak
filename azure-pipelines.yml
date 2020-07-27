@@ -4,20 +4,21 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-# variables:
-#   ios_run: $(to_ios_run)
-  # eq(variables.to_ios_run, true)
+variables:
+  ios_run: $(to_ios_run)
+ 
 stages:
-  # - stage: android
-  #   pool:
-  #     vmImage: 'ubuntu-16.04'
-  #   jobs:
-  #     - job: A1
-  #       steps:
-  #       - bash: echo "A"
+  - stage: android
+    pool:
+      vmImage: 'ubuntu-16.04'
+    jobs:
+      - job: A1
+        steps:
+        - bash: echo $(to_ios_run)
+        - bash: echo $(ios_run)
 
   - stage: ios
-    condition: $(to_ios_run)
+    condition: eq(variables.to_ios_run, true)
     pool:
       vmImage: 'ubuntu-latest'
     jobs:
