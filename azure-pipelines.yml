@@ -1,9 +1,6 @@
 trigger:
   - master
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 variables:
   ios_run: $(to_ios_run)
  
